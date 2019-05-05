@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-=======
-//import Auth from "./Auth/Auth";
->>>>>>> master
 
 class Nav extends Component {
   render() {
