@@ -15,4 +15,30 @@ export default class Auth {
   login = () => {
     this.auth0.authorize();
   };
+
+  //1. get data from url, parse it and write it to session
+
+  handleAuthentication = () => {
+    this.auth0.parseHash((err, authResult) => {
+      if (auth0Result && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult);
+        this.history.push("/");
+      } else if (err) {
+        this.history.push("/");
+        alert(`Error: ${err.error}. Check the console for further details`);
+        console.log(err);
+      }
+    });
+  };
+
+  setSession = authResult => {
+    //set time for access token to expire
+    const expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime
+    );
+
+    localStorage.setItem("acces_token", authResult.accessToken);
+    localStorage.setItem("id_token", authResult.idToken);
+    localStorage.setItem("expires_at", expiresAt);
+  };
 }
