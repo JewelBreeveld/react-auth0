@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+//import Auth from "./Auth/Auth";
+
 class Nav extends Component {
   render() {
+    const { isAuthenticated, logout, login } = this.props.auth;
+
     return (
       <nav>
         <ul>
@@ -10,6 +14,11 @@ class Nav extends Component {
           </li>
           <li>
             <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <button onClick={isAuthenticated() ? logout : login}>
+              {isAuthenticated() ? "Log out" : "Log In"}
+            </button>
           </li>
         </ul>
       </nav>
