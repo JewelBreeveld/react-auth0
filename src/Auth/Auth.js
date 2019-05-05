@@ -46,4 +46,11 @@ export default class Auth {
     const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
   }
+
+  logout = () => {
+    localStorage.removeItem("acces_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    this.history.push("/");
+  };
 }
